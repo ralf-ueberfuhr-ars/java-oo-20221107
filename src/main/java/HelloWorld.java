@@ -51,11 +51,50 @@ public class HelloWorld {
         System.out.println(zahlen.length);
         // Alternativen
         int zahlen2[] = { 1, 4 };
-        zahlen = new int[]{}; // leeres Array = Array mit Länge 0
+        zahlen = new int[] {}; // leeres Array = Array mit Länge 0
         zahlen = new int[0]; // leeres Array
         zahlen = new int[5]; // { 0, 0, 0, 0, 0}
 
-
+        // Kontrollstrukturen
+        // if~else
+        if (zahlen.length > 0) {
+            System.out.println("Array ist befüllt");
+        } else {
+            System.out.println("Array ist leer");
+        }
+        // kurz:
+        System.out.println(zahlen.length > 0 ? "Array ist befüllt" : "Array ist leer");
+        String text = zahlen.length > 0 ? "Array ist befüllt" : "Array ist leer";
+        // switch~case
+        switch (zahlen[0]) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            System.out.println("1..4");
+            break;
+        case 5:
+            System.out.println("5");
+            break;
+        case 6:
+            System.out.println("6");
+            break;
+        default:
+            System.out.println("Weder 5 noch 6");
+            break;
+        }
+        // Schleifen
+        int x1 = 5;
+        while (x1 > 0) {
+            x1--;
+        }
+        do { // weniger geläufig
+            x1--;
+        } while (x1 > 0);
+        // for-Schleife: Variable x2 ist nur im Schleifenrumpf gültig
+        for (int x2 = 5; x2 > 0; x2--) {
+            // ...
+        }
     }
 
 }
