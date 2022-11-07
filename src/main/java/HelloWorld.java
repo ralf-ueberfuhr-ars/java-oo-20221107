@@ -1,3 +1,6 @@
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class HelloWorld {
 
     public static void main(String[] args) {
@@ -104,6 +107,16 @@ public class HelloWorld {
             // verkürzt
             // ...
         }
+        // Durchschnitt von Zahlen
+        int[] arr = {4,7,9,2};
+        // Testen: arr = new int[0];
+        double avg = IntStream.of(arr)
+          .average()
+          .orElse(0.0);
+        System.out.println(avg);
+
+        System.out.println(0.0/0); // Double.isNaN(...), IEEE754
+        System.out.println(0/0);
     }
 
 }
