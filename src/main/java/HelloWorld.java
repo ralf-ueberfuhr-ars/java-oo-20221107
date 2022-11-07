@@ -95,6 +95,15 @@ public class HelloWorld {
         for (int x2 = 5; x2 > 0; x2--) {
             // ...
         }
+        for(int i=0; i<zahlen.length; i++) {
+            int iZahl = zahlen[i];
+            // ...
+            // Zugriff auf i
+        }
+        for (int iZahl : zahlen) {
+            // verkürzt
+            // ...
+        }
     }
 
 }
