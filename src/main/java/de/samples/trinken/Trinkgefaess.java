@@ -1,3 +1,5 @@
+package de.samples.trinken;
+
 public class Trinkgefaess {
 
     String farbe;

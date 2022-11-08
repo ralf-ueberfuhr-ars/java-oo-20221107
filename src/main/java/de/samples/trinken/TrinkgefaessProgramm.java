@@ -1,3 +1,5 @@
+package de.samples.trinken;
+
 public class TrinkgefaessProgramm {
 
     public static void main(String[] args) {
@@ -26,7 +28,7 @@ public class TrinkgefaessProgramm {
         // meinKaffeeTasse.fuellen(-100);
         System.out.println(meinKaffeeTasse.gewicht); // 300
 
-        // Schreibtisch
+        // de.samples.trinken.Schreibtisch
         Schreibtisch schreibtisch = new Schreibtisch();
         schreibtisch.farbe = "eiche";
         schreibtisch.breite = 200;
