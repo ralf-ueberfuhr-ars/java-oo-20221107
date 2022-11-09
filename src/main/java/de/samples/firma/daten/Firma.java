@@ -58,5 +58,12 @@ public class Firma {
     }
 
     // gehaltZahlen
+    public void gehaltZahlen() {
+        for (Mitarbeiter ma : this.mitarbeiter) {
+            if (null != ma) {
+                this.konto.überweisen(ma.getKonto(), ma.getGehalt());
+            }
+        }
+    }
 
 }

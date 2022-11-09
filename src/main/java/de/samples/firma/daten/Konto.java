@@ -20,4 +20,9 @@ public class Konto {
     public void setNummer(String nummer) {
         this.nummer = nummer;
     }
+
+    public void überweisen(Konto ziel, double betrag) {
+        this.stand -= betrag;
+        ziel.stand += betrag;
+    }
 }
