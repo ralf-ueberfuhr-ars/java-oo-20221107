@@ -1,17 +1,8 @@
 package de.samples.trinken;
 
-public class Schreibtisch {
+public class Schreibtisch extends Möbelstück {
 
-    String farbe;
-    int breite;
-    int höhe;
 
-    void streichen(String neueFarbe) {
-        farbe = neueFarbe;
-    }
-
-    void absenken(int differenz) {
-        höhe = höhe - differenz;
-    }
+    int tischplattenGroesse;
 
 }

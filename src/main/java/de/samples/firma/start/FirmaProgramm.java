@@ -11,8 +11,8 @@ public class FirmaProgramm {
     public static void main(String[] args) {
 
         // v und v2 müssen auf dasselbe Objekt zeigen
-        Firmenverwaltung v = new Firmenverwaltung();
-        Firmenverwaltung v2 = new Firmenverwaltung();
+        Firmenverwaltung v = Firmenverwaltung.getTheInstance();
+        Firmenverwaltung v2 = Firmenverwaltung.getTheInstance();
 
         Ort java = new Ort("JavaStadt", "12345");
 
@@ -62,6 +62,7 @@ public class FirmaProgramm {
         java = new Ort("Java Insel", "12345");
         adidos.setOrt(java);
 
+        v.setFirmen(new Firma[]{adidos, rehbock});
 
         // Vergleiche:
         // 1000 == 1000? Haben beide Konten gleich viel Geld?

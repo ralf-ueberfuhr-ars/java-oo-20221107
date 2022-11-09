@@ -6,7 +6,7 @@ public class Trinkgefaess {
     int volumen = 10; // ml
     int leerGewicht;
     int gewicht;
-    Schreibtisch ort;
+    Möbelstück ort;
 
     // Rückgabetyp, Namen, Parameter, Impl.
 
