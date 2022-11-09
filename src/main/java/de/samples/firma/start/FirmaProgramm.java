@@ -14,9 +14,9 @@ public class FirmaProgramm {
         Firmenverwaltung v = new Firmenverwaltung();
         Firmenverwaltung v2 = new Firmenverwaltung();
 
-        Ort java = new Ort();
-        java.setName("JavaStadt");
-        java.setPostleitzahl("12345");
+        Ort java = new Ort("JavaStadt", "12345");
+
+        // java = null; nicht erlaubt, weil final
 
         Konto firmenKonto = new Konto();
         firmenKonto.setNummer("123456789");
@@ -52,8 +52,16 @@ public class FirmaProgramm {
         adidos.einstellen(tom);
         adidos.einstellen(julia);
 
+        Firma rehbock = new Firma(); // 100
+        int standardAnzahl = Firma.STANDARD_ANZAHL;
+        int standardAnzahl2 = Firma.STANDARD_ANZAHL;
 
         adidos.entlassen(tom);
+
+        // Ort ändert seinen Namen
+        java = new Ort("Java Insel", "12345");
+        adidos.setOrt(java);
+
 
         // Vergleiche:
         // 1000 == 1000? Haben beide Konten gleich viel Geld?
@@ -74,6 +82,14 @@ public class FirmaProgramm {
         nochEineWeitereJulia.setName(new String("Julia"));
         System.out.println(nochEineWeitereJulia.heißtWie(julia));
 
+        adidos.gehaltZahlen(julia);
+        adidos.gehaltZahlen();
+
+        firmenKonto.überweisen(maKonto, 1000);
+        // statische Methode
+        Konto.überweisen(firmenKonto, maKonto, 1000);
+
+
         // Wrappertypen
         int x = 0;
         Integer xx = Integer.valueOf(x);
@@ -86,6 +102,11 @@ public class FirmaProgramm {
         xx = x; // kurz für xx = Integer.valueOf(x)
         // xx = null; --> NPE in folgender Zeile
         x = xx; // kurz für x = xx.intValue(); => NPE?
+
+        // Hilfsklassen -> nur statische Funktionen
+        // nicht gewollt: System system = new System();
+        long time = System.currentTimeMillis();
+        double acos = Math.acos(0.5);
 
     }
 

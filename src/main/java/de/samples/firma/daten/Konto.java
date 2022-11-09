@@ -22,7 +22,14 @@ public class Konto {
     }
 
     public void überweisen(Konto ziel, double betrag) {
-        this.stand -= betrag;
+        synchronized (this) {
+            this.stand -= betrag;
+            ziel.stand += betrag;
+        }
+    }
+
+    public static void überweisen(Konto quelle, Konto ziel, double betrag) {
+        quelle.stand -= betrag;
         ziel.stand += betrag;
     }
 }
