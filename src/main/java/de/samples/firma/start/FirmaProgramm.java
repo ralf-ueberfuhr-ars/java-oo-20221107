@@ -6,6 +6,12 @@ import de.samples.firma.daten.Konto;
 import de.samples.firma.daten.Mitarbeiter;
 import de.samples.firma.daten.Ort;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 public class FirmaProgramm {
 
     public static void main(String[] args) {
@@ -62,7 +68,48 @@ public class FirmaProgramm {
         java = new Ort("Java Insel", "12345");
         adidos.setOrt(java);
 
-        v.setFirmen(new Firma[]{adidos, rehbock});
+        //v.setFirmen(new Firma[]{adidos, rehbock});
+        v.register(adidos);
+        v.register(adidos);
+        v.getFirmen().add(rehbock);
+
+        // Iterieren
+        for(Firma firma : v.getFirmen()) {
+            System.out.println(firma.getName());
+            // NICHT: firmen.remove(firma);
+        }
+        Collection<Firma> firmen = v.getFirmen();
+        Iterator<Firma> iterator = firmen.iterator();
+        while (iterator.hasNext()) {
+            Firma firma = iterator.next();
+            System.out.println(firma.getName());
+            if(firma.getName().equals("adidos")) {
+                iterator.remove();
+                // NICHT: firmen.remove(firma);
+            }
+        }
+        // als for
+        for(Iterator<Firma> it = firmen.iterator(); it.hasNext(); ) {
+            Firma firma = it.next();
+            System.out.println(firma.getName());
+            if(firma.getName().equals("adidos")) {
+                it.remove();
+                // NICHT: firmen.remove(firma);
+            }
+        }
+
+        // Maps
+        Map<String, Firma> firmenByName = new HashMap<>();
+        firmenByName.put("adidos", adidos);
+        Firma fa = firmenByName.get("adidos");
+        Set<Map.Entry<String, Firma>> entries = firmenByName.entrySet();
+        for (Map.Entry<String, Firma> entry : entries) {
+            String key = entry.getKey();
+            Firma value = entry.getValue();
+        }
+
+
+        
 
         // Vergleiche:
         // 1000 == 1000? Haben beide Konten gleich viel Geld?
