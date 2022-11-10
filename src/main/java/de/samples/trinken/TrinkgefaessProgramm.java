@@ -30,7 +30,7 @@ public class TrinkgefaessProgramm {
 
         // de.samples.trinken.Schreibtisch
         Schreibtisch schreibtisch = new Schreibtisch();
-        schreibtisch.farbe = "eiche";
+        schreibtisch.farbe = Möbelfarbe.EICHE;
         schreibtisch.breite = 200;
         schreibtisch.höhe = 85;
         schreibtisch.absenken(3);

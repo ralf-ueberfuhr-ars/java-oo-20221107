@@ -2,11 +2,11 @@ package de.samples.trinken;
 
 public abstract class Möbelstück {
 
-    String farbe;
+    Möbelfarbe farbe;
     int breite;
     int höhe;
 
-    void streichen(String neueFarbe) {
+    void streichen(Möbelfarbe neueFarbe) {
         farbe = neueFarbe;
     }
 
