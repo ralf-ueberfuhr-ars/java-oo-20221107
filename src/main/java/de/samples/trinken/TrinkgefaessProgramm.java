@@ -33,6 +33,7 @@ public class TrinkgefaessProgramm {
         schreibtisch.farbe = Möbelfarbe.EICHE;
         schreibtisch.breite = 200;
         schreibtisch.höhe = 85;
+        schreibtisch.tischplattenGroesse = 100;
         schreibtisch.absenken(3);
         System.out.println(schreibtisch.höhe);
 
@@ -52,6 +53,7 @@ public class TrinkgefaessProgramm {
         absenken(m2);
 
         Möbelstück m3 = new Schreibtisch() { // anonyme Klasse = Unterklasse
+            @Override
             void absenken(int differenz) {
                 System.out.println("Ällerbätsch!");
             }
@@ -59,18 +61,20 @@ public class TrinkgefaessProgramm {
         m3.höhe = 100;
         absenken(m3);
 
-        meinKaffeeTasse.ort = schreibtisch;
-        meinGlass.ort = schreibtisch;
+        meinKaffeeTasse.setOrt(schreibtisch);
+        meinGlass.setOrt(schreibtisch);
 
-        meinKaffeeTasse.ort.absenken(4);
+        meinKaffeeTasse.getOrt().absenken(4);
         System.out.println(schreibtisch.höhe);
-        System.out.println(meinGlass.ort.höhe);
+        System.out.println(meinGlass.getOrt().höhe);
 
+        meinGlass.setOrt(kommode);
+        meinGlass.setOrt(new Bett());
     }
 
     private static void absenken(Möbelstück m) {
         m.absenken(10); // Polymorphie
-        System.out.println("Höhe des Möbelstücks: " + m.höhe);
+        System.out.println("Höhe des Möbelstücks (" + m.getClass().getName() + "): " + m.höhe);
     }
 
 

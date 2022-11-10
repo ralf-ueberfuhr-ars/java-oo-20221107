@@ -39,6 +39,7 @@ public class GenericsSamples {
             Integer next = col.iterator().next();
         }
         {
+            @SuppressWarnings("rawtypes")
             Warenkorb w1 = new Warenkorb();
             w1.setInhalt("text");
             w1.setInhalt(1);
