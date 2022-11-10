@@ -1,3 +1,5 @@
+package de.samples;
+
 import de.samples.firma.daten.Konto;
 
 import java.util.ArrayList;
