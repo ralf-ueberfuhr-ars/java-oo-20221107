@@ -1,6 +1,6 @@
 package de.samples.trinken;
 
-public class Möbelstück {
+public abstract class Möbelstück {
 
     String farbe;
     int breite;

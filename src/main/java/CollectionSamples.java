@@ -17,6 +17,8 @@ public class CollectionSamples {
         System.out.println(fill(new TreeSet<>()));
         System.out.println(fill(new LinkedList<>()));
 
+        // abstrakt
+        // System.out.println(fill(new Collection<>()));
 
     }
 

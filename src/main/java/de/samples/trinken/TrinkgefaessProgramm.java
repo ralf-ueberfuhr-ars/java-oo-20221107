@@ -36,6 +36,29 @@ public class TrinkgefaessProgramm {
         schreibtisch.absenken(3);
         System.out.println(schreibtisch.höhe);
 
+        Kommode kommode = new Kommode();
+
+        // abstrakte Klasse
+        // Möbelstück m = new Möbelstück();
+        Möbelstück m = new Kommode();
+        m.höhe = 100;
+
+        // Überschreiben von Methoden
+        // --> Dynamische Bindung
+        absenken(m);
+
+        Möbelstück m2 = new Schreibtisch();
+        m2.höhe = 100;
+        absenken(m2);
+
+        Möbelstück m3 = new Schreibtisch() { // anonyme Klasse = Unterklasse
+            void absenken(int differenz) {
+                System.out.println("Ällerbätsch!");
+            }
+        };
+        m3.höhe = 100;
+        absenken(m3);
+
         meinKaffeeTasse.ort = schreibtisch;
         meinGlass.ort = schreibtisch;
 
@@ -43,7 +66,12 @@ public class TrinkgefaessProgramm {
         System.out.println(schreibtisch.höhe);
         System.out.println(meinGlass.ort.höhe);
 
-
     }
+
+    private static void absenken(Möbelstück m) {
+        m.absenken(10); // Polymorphie
+        System.out.println("Höhe des Möbelstücks: " + m.höhe);
+    }
+
 
 }
