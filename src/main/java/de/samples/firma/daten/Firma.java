@@ -1,6 +1,9 @@
 package de.samples.firma.daten;
 
-public class Firma {
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class Firma implements Iterable<Mitarbeiter> {
 
     // Konstante = Klassenvariable (unveränderlich)
     public static final int STANDARD_ANZAHL = 100;
@@ -77,4 +80,8 @@ public class Firma {
         this.konto.überweisen(mitarbeiter.getKonto(), mitarbeiter.getGehalt());
     }
 
+    @Override
+    public Iterator<Mitarbeiter> iterator() {
+        return Arrays.asList(mitarbeiter).iterator();
+    }
 }

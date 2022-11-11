@@ -1,6 +1,6 @@
 package de.samples.firma.daten;
 
-public class Mitarbeiter {
+public class Mitarbeiter implements Comparable<Mitarbeiter> {
 
     private String name;
     private int alter;
@@ -49,4 +49,20 @@ public class Mitarbeiter {
           && this.name.equals(ma.name);
     }
 
+    @Override
+    public int compareTo(Mitarbeiter m) {
+        // Aufpassen: this.name == null?
+        // Aufpassen: gleicher Name --> Duplikat?
+        // Sortierung nach Namen absteigend
+        return -this.name.compareTo(m.name);
+    }
+
+    @Override
+    public String toString() {
+        return "Mitarbeiter{" +
+          "name='" + name + '\'' +
+          ", alter=" + alter +
+          ", gehalt=" + gehalt +
+          '}';
+    }
 }

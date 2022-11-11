@@ -51,10 +51,11 @@ public class TrinkgefaessProgramm {
         Möbelstück m2 = new Schreibtisch();
         m2.höhe = 100;
         absenken(m2);
+        m2.zeigeInhalt();
 
         Möbelstück m3 = new Schreibtisch() { // anonyme Klasse = Unterklasse
             @Override
-            void absenken(int differenz) {
+            public void absenken(int differenz) {
                 System.out.println("Ällerbätsch!");
             }
         };
@@ -70,11 +71,21 @@ public class TrinkgefaessProgramm {
 
         meinGlass.setOrt(kommode);
         meinGlass.setOrt(new Bett());
+
+        m.zeigeInhalt();
+        m2.zeigeInhalt();
+        m3.zeigeInhalt();
+
+        Object o = new Object();
     }
 
-    private static void absenken(Möbelstück m) {
+    private static void absenken(Höhenverstellbar m) {
         m.absenken(10); // Polymorphie
-        System.out.println("Höhe des Möbelstücks (" + m.getClass().getName() + "): " + m.höhe);
+        // Ausnahmsweise:
+        if(m instanceof Möbelstück) {
+            Möbelstück möbel = (Möbelstück) m;
+            System.out.println("Höhe des Möbelstücks (" + m.getClass().getName() + "): " + möbel.höhe);
+        }
     }
 
 

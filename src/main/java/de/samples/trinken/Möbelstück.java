@@ -1,6 +1,6 @@
 package de.samples.trinken;
 
-public abstract class Möbelstück {
+public abstract class Möbelstück implements Höhenverstellbar {
 
     Möbelfarbe farbe;
     int breite;
@@ -10,8 +10,10 @@ public abstract class Möbelstück {
         farbe = neueFarbe;
     }
 
-    void absenken(int differenz) {
+    @Override
+    public void absenken(int differenz) {
         höhe = höhe - differenz;
     }
 
+    public abstract void zeigeInhalt();
 }

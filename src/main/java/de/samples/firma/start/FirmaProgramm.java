@@ -7,10 +7,12 @@ import de.samples.firma.daten.Mitarbeiter;
 import de.samples.firma.daten.Ort;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class FirmaProgramm {
 
@@ -108,8 +110,32 @@ public class FirmaProgramm {
             Firma value = entry.getValue();
         }
 
+        for(Iterator<Mitarbeiter> it = adidos.iterator(); it.hasNext(); ) {
+            Mitarbeiter ma = it.next();
+            // ...
+        }
+        for(Mitarbeiter ma : adidos) { // adidos instanceof Iterable
 
-        
+        }
+
+        // Sortierung nach Namen absteigend (impl. im Mitarbeiter)
+        Collection<Mitarbeiter> mitarbeiterSortiert = new TreeSet<>();
+        mitarbeiterSortiert.add(julia);
+        mitarbeiterSortiert.add(tom);
+        System.out.println("Sortiere Mitarbeiter: " + mitarbeiterSortiert);
+
+        // Sortierung nach Alter
+        Comparator<Mitarbeiter> comparator = new Comparator<Mitarbeiter>() {
+            @Override
+            public int compare(Mitarbeiter o1, Mitarbeiter o2) {
+                int result = o1.getAlter() - o2.getAlter();
+                return 0 != result ? result : 1;
+            }
+        };
+        Collection<Mitarbeiter> mitarbeiterSortiert2 = new TreeSet<>(comparator);
+        mitarbeiterSortiert2.add(julia);
+        mitarbeiterSortiert2.add(tom);
+        System.out.println("Sortiere Mitarbeiter: " + mitarbeiterSortiert2);
 
         // Vergleiche:
         // 1000 == 1000? Haben beide Konten gleich viel Geld?
