@@ -182,6 +182,7 @@ public class FirmaProgramm {
         long time = System.currentTimeMillis();
         double acos = Math.acos(0.5);
 
+
     }
 
 }

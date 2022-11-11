@@ -1,5 +1,7 @@
 package de.samples.firma.daten;
 
+import java.util.Objects;
+
 public class Mitarbeiter implements Comparable<Mitarbeiter> {
 
     private String name;
@@ -55,6 +57,21 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
         // Aufpassen: gleicher Name --> Duplikat?
         // Sortierung nach Namen absteigend
         return -this.name.compareTo(m.name);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Mitarbeiter that = (Mitarbeiter) o;
+        return alter == that.alter && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, alter);
     }
 
     @Override
