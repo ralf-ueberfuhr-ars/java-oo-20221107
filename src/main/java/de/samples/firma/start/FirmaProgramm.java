@@ -125,13 +125,11 @@ public class FirmaProgramm {
         System.out.println("Sortiere Mitarbeiter: " + mitarbeiterSortiert);
 
         // Sortierung nach Alter
-        Comparator<Mitarbeiter> comparator = new Comparator<Mitarbeiter>() {
-            @Override
-            public int compare(Mitarbeiter o1, Mitarbeiter o2) {
-                int result = o1.getAlter() - o2.getAlter();
-                return 0 != result ? result : 1;
-            }
+        Comparator<Mitarbeiter> comparator = (o1, o2) -> {
+            int result = o1.getAlter() - o2.getAlter();
+            return 0 != result ? result : 1;
         };
+        comparator = Comparator.comparingInt(Mitarbeiter::getAlter);
         Collection<Mitarbeiter> mitarbeiterSortiert2 = new TreeSet<>(comparator);
         mitarbeiterSortiert2.add(julia);
         mitarbeiterSortiert2.add(tom);

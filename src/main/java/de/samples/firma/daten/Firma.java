@@ -2,6 +2,8 @@ package de.samples.firma.daten;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Firma implements Iterable<Mitarbeiter> {
 
@@ -68,11 +70,16 @@ public class Firma implements Iterable<Mitarbeiter> {
 
     // gehaltZahlen für alle
     public void gehaltZahlen() {
+        Stream.of(this.mitarbeiter)
+          .filter(Objects::nonNull)
+          .forEach(this::gehaltZahlen);
+/*
         for (Mitarbeiter ma : this.mitarbeiter) {
             if (null != ma) {
                 this.gehaltZahlen(ma);
             }
         }
+*/
     }
 
     // gehaltZahlen für einen
