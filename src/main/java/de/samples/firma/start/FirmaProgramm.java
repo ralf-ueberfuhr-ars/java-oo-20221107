@@ -3,9 +3,14 @@ package de.samples.firma.start;
 import de.samples.firma.daten.Firma;
 import de.samples.firma.daten.Firmenverwaltung;
 import de.samples.firma.daten.Konto;
+import de.samples.firma.daten.KontoNichtGedecktException;
 import de.samples.firma.daten.Mitarbeiter;
 import de.samples.firma.daten.Ort;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -37,7 +42,7 @@ public class FirmaProgramm {
         Mitarbeiter tom = new Mitarbeiter();
         System.out.println(tom.getName());
         tom.setName(null);
-        if(tom.getName() != null) {
+        if (tom.getName() != null) {
             // ...
             System.out.println(tom.getName().toLowerCase());
         }
@@ -76,7 +81,7 @@ public class FirmaProgramm {
         v.getFirmen().add(rehbock);
 
         // Iterieren
-        for(Firma firma : v.getFirmen()) {
+        for (Firma firma : v.getFirmen()) {
             System.out.println(firma.getName());
             // NICHT: firmen.remove(firma);
         }
@@ -85,16 +90,16 @@ public class FirmaProgramm {
         while (iterator.hasNext()) {
             Firma firma = iterator.next();
             System.out.println(firma.getName());
-            if(firma.getName().equals("adidos")) {
+            if (firma.getName().equals("adidos")) {
                 iterator.remove();
                 // NICHT: firmen.remove(firma);
             }
         }
         // als for
-        for(Iterator<Firma> it = firmen.iterator(); it.hasNext(); ) {
+        for (Iterator<Firma> it = firmen.iterator(); it.hasNext(); ) {
             Firma firma = it.next();
             System.out.println(firma.getName());
-            if(firma.getName().equals("adidos")) {
+            if (firma.getName().equals("adidos")) {
                 it.remove();
                 // NICHT: firmen.remove(firma);
             }
@@ -110,11 +115,11 @@ public class FirmaProgramm {
             Firma value = entry.getValue();
         }
 
-        for(Iterator<Mitarbeiter> it = adidos.iterator(); it.hasNext(); ) {
+        for (Iterator<Mitarbeiter> it = adidos.iterator(); it.hasNext(); ) {
             Mitarbeiter ma = it.next();
             // ...
         }
-        for(Mitarbeiter ma : adidos) { // adidos instanceof Iterable
+        for (Mitarbeiter ma : adidos) { // adidos instanceof Iterable
 
         }
 
@@ -154,25 +159,55 @@ public class FirmaProgramm {
         nochEineWeitereJulia.setName(new String("Julia"));
         System.out.println(nochEineWeitereJulia.heißtWie(julia));
 
-        adidos.gehaltZahlen(julia);
+        try {
+            adidos.gehaltZahlen(julia);
+        } catch (KontoNichtGedecktException e) {
+            e.printStackTrace();
+        }
         adidos.gehaltZahlen();
 
-        firmenKonto.überweisen(maKonto, 1000);
+        try {
+            firmenKonto.überweisen(maKonto, 1000);
+        } catch (KontoNichtGedecktException e) {
+            e.printStackTrace();
+        }
         // statische Methode
-        Konto.überweisen(firmenKonto, maKonto, 1000);
+        try {
+            Konto.überweisen(firmenKonto, maKonto, 1000);
+        } catch (KontoNichtGedecktException e) {
+            e.printStackTrace();
+        }
 
         adidos.getReicheMitarbeiter()
           .skip(3) // nur die ersten 3
           .forEach(System.out::println);
 
         Mitarbeiter tom1 = adidos.findeNachNamen("Tom");
-        if(tom1 != null) {
+        if (tom1 != null) {
             // ...
             tom1.setAlter(20);
         }
 
         adidos.findeNachNamenMitOptional("Tom")
           .ifPresent(m -> m.setAlter(20));
+
+        // try~finally / AutoCloseable-Interface
+        try {
+            OutputStream out = new FileOutputStream("text.txt");
+            try {
+                out.write(5);
+            } finally {
+                out.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // OutputStream erbt von AutoCloseable
+        try (OutputStream out = new FileOutputStream("text.txt")) {
+            out.write(5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Wrappertypen
         int x = 0;
@@ -191,7 +226,6 @@ public class FirmaProgramm {
         // nicht gewollt: System system = new System();
         long time = System.currentTimeMillis();
         double acos = Math.acos(0.5);
-
 
     }
 

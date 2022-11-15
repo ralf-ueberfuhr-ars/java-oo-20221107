@@ -21,6 +21,10 @@ public class Firma implements Iterable<Mitarbeiter> {
     }
 
     public Firma(int maximaleAnzahlMitarbeiter) {
+        if(maximaleAnzahlMitarbeiter<=0) {
+            IllegalArgumentException ex = new IllegalArgumentException("maximaleAnzahlMitarbeiter must be gt 0");
+            throw ex;
+        }
         mitarbeiter = new Mitarbeiter[maximaleAnzahlMitarbeiter];
     }
 
@@ -50,6 +54,9 @@ public class Firma implements Iterable<Mitarbeiter> {
 
     // einstellen
     public void einstellen(Mitarbeiter ma) {
+        if(ma == null) {
+            throw new IllegalArgumentException("ma must not be null");
+        }
         // TODO ist er schon drin?
         for (int i = 0; i < mitarbeiter.length; i++) {
             if (mitarbeiter[i] == null) {
@@ -61,6 +68,9 @@ public class Firma implements Iterable<Mitarbeiter> {
 
     // entlassen
     public void entlassen(final Mitarbeiter ma) {
+        if(ma == null) {
+            throw new IllegalArgumentException("ma must not be null");
+        }
         for (int i = 0; i < mitarbeiter.length; i++) {
             if (mitarbeiter[i] == ma) {
                 mitarbeiter[i] = null;
@@ -94,7 +104,13 @@ public class Firma implements Iterable<Mitarbeiter> {
     public void gehaltZahlen() {
         Stream.of(this.mitarbeiter)
           .filter(Objects::nonNull)
-          .forEach(this::gehaltZahlen);
+          .forEach(m -> {
+              try {
+                  this.gehaltZahlen(m);
+              } catch (KontoNichtGedecktException e) {
+                  throw new RuntimeException(e);
+              }
+          });
 /*
         for (Mitarbeiter ma : this.mitarbeiter) {
             if (null != ma) {
@@ -105,7 +121,7 @@ public class Firma implements Iterable<Mitarbeiter> {
     }
 
     // gehaltZahlen für einen
-    public void gehaltZahlen(Mitarbeiter mitarbeiter) {
+    public void gehaltZahlen(Mitarbeiter mitarbeiter) throws KontoNichtGedecktException {
         this.konto.überweisen(mitarbeiter.getKonto(), mitarbeiter.getGehalt());
     }
 

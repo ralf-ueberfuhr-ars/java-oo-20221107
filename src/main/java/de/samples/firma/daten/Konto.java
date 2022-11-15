@@ -21,15 +21,17 @@ public class Konto {
         this.nummer = nummer;
     }
 
-    public void überweisen(Konto ziel, double betrag) {
+    public void überweisen(Konto ziel, double betrag) throws KontoNichtGedecktException {
         synchronized (this) {
+            if(this.stand < betrag) {
+                throw new KontoNichtGedecktException(this, betrag);
+            }
             this.stand -= betrag;
             ziel.stand += betrag;
         }
     }
 
-    public static void überweisen(Konto quelle, Konto ziel, double betrag) {
-        quelle.stand -= betrag;
-        ziel.stand += betrag;
+    public static void überweisen(Konto quelle, Konto ziel, double betrag) throws KontoNichtGedecktException {
+            quelle.überweisen(ziel, betrag);
     }
 }
