@@ -161,6 +161,18 @@ public class FirmaProgramm {
         // statische Methode
         Konto.überweisen(firmenKonto, maKonto, 1000);
 
+        adidos.getReicheMitarbeiter()
+          .skip(3) // nur die ersten 3
+          .forEach(System.out::println);
+
+        Mitarbeiter tom1 = adidos.findeNachNamen("Tom");
+        if(tom1 != null) {
+            // ...
+            tom1.setAlter(20);
+        }
+
+        adidos.findeNachNamenMitOptional("Tom")
+          .ifPresent(m -> m.setAlter(20));
 
         // Wrappertypen
         int x = 0;

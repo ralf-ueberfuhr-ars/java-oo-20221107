@@ -3,6 +3,7 @@ package de.samples.firma.daten;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Firma implements Iterable<Mitarbeiter> {
@@ -66,6 +67,27 @@ public class Firma implements Iterable<Mitarbeiter> {
                 break;
             }
         }
+    }
+
+    public Mitarbeiter findeNachNamen(String name) {
+        for (int i = 0; i < mitarbeiter.length; i++) {
+            if (name.equals(mitarbeiter[i].getName())) {
+                return mitarbeiter[i];
+            }
+        }
+        return null;
+    }
+
+    public Optional<Mitarbeiter> findeNachNamenMitOptional(String name) {
+        return Stream.of(this.mitarbeiter)
+          .filter(m -> m.getName().equals(name))
+          .findFirst();
+    }
+
+        // Reiche Mitarbeiter = MA mit 100k EUR auf dem Konto
+    public Stream<Mitarbeiter> getReicheMitarbeiter() {
+        return Stream.of(this.mitarbeiter)
+          .filter(m -> m.getKonto() != null && m.getKonto().getStand() >= 100_000);
     }
 
     // gehaltZahlen für alle
